@@ -24,7 +24,7 @@
 
 2. **Deploy the application on AWS using the Jenkinsfile**
 
-You should set up the necessary infrastructure on AWS (e.g., EC2 instance, Docker registry, etc.) and modify the Jenkinsfile to deploy the Docker image to the AWS infrastructure.
+   You should set up the necessary infrastructure on AWS (e.g., EC2 instance, Docker registry, etc.) and modify the Jenkinsfile to deploy the Docker image to the AWS infrastructure.
 
 ## Current Jenkinsfile
 
@@ -32,5 +32,5 @@ The current Jenkinsfile performs the following steps:
 
 1. **Checkout**: Checks out the code from the specified Git repository.
 2. **Build**: Builds a Docker image for the application with the tag `latest`.
-3. **Test**: Run tests
+3. **Test**: Run `Test`
 4. **Post-build**: Cleans up the workspace after the pipeline finishes.
