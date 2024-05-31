@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = "your-app"
         DOCKER_REGISTRY = "your.docker.registry.com"
-        DOCKER_REGISTRY_CREDENTIALS = credentials('docker-registry-credentials')
     }
 
     stages {
@@ -37,7 +36,7 @@ pipeline {
             steps {
                 unstash 'app'
                 script {
-                    docker.withRegistry("https://${DOCKER_REGISTRY}", DOCKER_REGISTRY_CREDENTIALS) {
+                    docker.withRegistry("https://${DOCKER_REGISTRY}") {
                         def customImage = docker.build("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}", "-f Dockerfile .")
                         customImage.push()
                     }
@@ -49,7 +48,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    docker.withRegistry("https://${DOCKER_REGISTRY}", DOCKER_REGISTRY_CREDENTIALS) {
+                    docker.withRegistry("https://${DOCKER_REGISTRY}") {
                         sh """
                             docker pull ${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${env.BUILD_ID}
                             docker stop ${DOCKER_IMAGE_NAME} || true
